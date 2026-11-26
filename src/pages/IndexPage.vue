@@ -34,6 +34,20 @@
         </q-list>
       </q-card-section>
     </q-card>
+
+    <q-card class="q-mt-md">
+      <q-card-section>
+        <div class="text-h6">Docker Quick Reference</div>
+        <q-list bordered separator class="q-mt-sm">
+          <q-item v-for="item in dockerCommands" :key="item.command">
+            <q-item-section>
+              <q-item-label><code>{{ item.command }}</code></q-item-label>
+              <q-item-label caption>{{ item.when }}</q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-list>
+      </q-card-section>
+    </q-card>
   </q-page>
 </template>
 
@@ -77,6 +91,25 @@ const dockerItems = [
   {
     title: 'Network',
     detail: 'ให้บริการใน Docker ติดต่อกันได้ เช่น Nginx ส่งต่อคำขอไปยัง Express',
+  },
+]
+
+const dockerCommands = [
+  {
+    command: 'docker build -t my-app .',
+    when: 'ใช้เมื่อมี Dockerfile และต้องการสร้าง image จากโค้ดในโฟลเดอร์ปัจจุบัน',
+  },
+  {
+    command: 'docker run --rm -p 8080:80 my-app',
+    when: 'ใช้เมื่ออยากเริ่ม container จาก image และเปิดให้เข้าแอปผ่านพอร์ต 8080 ของเครื่อง',
+  },
+  {
+    command: 'docker compose up -d --build',
+    when: 'ใช้เมื่อจะสร้างหรืออัปเดต service ใน Compose พร้อม build image แล้วรันไว้เบื้องหลัง',
+  },
+  {
+    command: 'docker compose logs -f',
+    when: 'ใช้เมื่อต้องการติดตาม log ของ service แบบต่อเนื่องเพื่อดูสถานะหรือหาสาเหตุของปัญหา',
   },
 ]
 </script>
